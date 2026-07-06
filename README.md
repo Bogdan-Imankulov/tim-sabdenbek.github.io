@@ -1,4 +1,4 @@
-# tim-sabdenbek.us — athlete portfolio
+# tim-sabdenbek.lifestyle — athlete portfolio
 
 Static one-page portfolio for Temirkhan Sabdenbek (Modern Pentathlon, Team USA).
 No build step, no frameworks — plain HTML + CSS + a little vanilla JS + Bootstrap 5 from CDN.
@@ -68,7 +68,7 @@ one property per line. Please keep new styles in the same format.
   wins something new, add a line there too.
 - `robots.txt` and `sitemap.xml` sit in the site root and must be uploaded
   with the site.
-- The canonical domain is `https://tim-sabdenbek.us/`. If the site is
+- The canonical domain is `https://tim-sabdenbek.lifestyle/`. If the site is
   deployed to a different domain, update it in: `<link rel="canonical">`,
   `og:url`, `og:image`, `twitter:image`, the JSON-LD `url`/`image`,
   and in `robots.txt` + `sitemap.xml`.
