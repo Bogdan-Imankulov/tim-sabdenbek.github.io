@@ -70,16 +70,67 @@
     });
   }
 
-  /* 4. Gallery lightbox: click a slide to view it full-size ---- */
+  /* 4. Gallery lightbox: click a slide to view it full-size.
+     The lightbox is a slider too: arrows, keyboard (←/→) and
+     touch swipe all switch photos while zoomed in. ------------- */
   var lightboxEl = document.getElementById("lightbox");
   if (carousel && lightboxEl) {
     var lightboxImg = document.getElementById("lightboxImg");
-    carousel.querySelectorAll(".carousel-item img").forEach(function (img) {
+    var galleryImgs = Array.prototype.slice.call(
+      carousel.querySelectorAll(".carousel-item img")
+    );
+    var currentIndex = 0;
+
+    function showPhoto(index) {
+      /* wrap around at both ends */
+      currentIndex = (index + galleryImgs.length) % galleryImgs.length;
+      lightboxImg.src = galleryImgs[currentIndex].src;
+      lightboxImg.alt = galleryImgs[currentIndex].alt;
+    }
+
+    galleryImgs.forEach(function (img, i) {
       img.addEventListener("click", function () {
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
+        showPhoto(i);
         bootstrap.Modal.getOrCreateInstance(lightboxEl).show();
       });
+    });
+
+    /* arrows */
+    document.getElementById("lightboxPrev").addEventListener("click", function () {
+      showPhoto(currentIndex - 1);
+    });
+    document.getElementById("lightboxNext").addEventListener("click", function () {
+      showPhoto(currentIndex + 1);
+    });
+
+    /* keyboard: ← / → while the lightbox is open */
+    lightboxEl.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { showPhoto(currentIndex - 1); }
+      if (e.key === "ArrowRight") { showPhoto(currentIndex + 1); }
+    });
+
+    /* touch swipe on the photo */
+    var touchStartX = null;
+    lightboxEl.addEventListener("touchstart", function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    lightboxEl.addEventListener("touchend", function (e) {
+      if (touchStartX === null) { return; }
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(dx) < 40) { return; } /* too short — not a swipe */
+      if (dx > 0) { showPhoto(currentIndex - 1); } else { showPhoto(currentIndex + 1); }
+    }, { passive: true });
+
+    /* pause the background carousel while zoomed in;
+       on close, jump it to the last viewed photo and resume */
+    lightboxEl.addEventListener("show.bs.modal", function () {
+      bootstrap.Carousel.getOrCreateInstance(carousel).pause();
+    });
+    lightboxEl.addEventListener("hidden.bs.modal", function () {
+      var c = bootstrap.Carousel.getOrCreateInstance(carousel);
+      c.to(currentIndex);
+      c.cycle();
     });
   }
 

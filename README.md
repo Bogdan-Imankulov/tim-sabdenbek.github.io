@@ -59,8 +59,23 @@ one property per line. Please keep new styles in the same format.
   picks it up automatically.
 - Users with "reduced motion" OS setting get a static page (accessibility).
 
+## SEO
+
+- All meta tags (title, description, keywords, Open Graph link previews,
+  Twitter card) and the schema.org JSON-LD athlete profile live at the top
+  of `index.html` in the commented `SEO` block of `<head>`.
+- Achievements are listed in the JSON-LD `award` array — when Temirkhan
+  wins something new, add a line there too.
+- `robots.txt` and `sitemap.xml` sit in the site root and must be uploaded
+  with the site.
+- The canonical domain is `https://tim-sabdenbek.us/`. If the site is
+  deployed to a different domain, update it in: `<link rel="canonical">`,
+  `og:url`, `og:image`, `twitter:image`, the JSON-LD `url`/`image`,
+  and in `robots.txt` + `sitemap.xml`.
+
 ## Deployment
 
-It's a static site: upload `index.html`, `css/`, `js/`, `assets/` to the
-hosting web root (via FTP / hosting file manager). Nothing to install or build.
+It's a static site: upload `index.html`, `css/`, `js/`, `assets/`,
+`robots.txt` and `sitemap.xml` to the hosting web root (via FTP / hosting
+file manager). Nothing to install or build.
 `photos/` and `*.txt` do not need to be uploaded.

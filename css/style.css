@@ -583,6 +583,47 @@ h1, h2, h3, .navbar-brand {
   z-index: 10;
 }
 
+/* lightbox prev/next arrows — the slider keeps working while zoomed in */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background-color: rgba(6, 18, 41, .55);
+  color: var(--white);
+  font-size: 1.4rem;
+  border-style: none;
+  border-width: 0;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  transition-property: background-color, transform;
+  transition-duration: .2s, .2s;
+  transition-timing-function: ease, ease;
+}
+.lightbox-nav:hover {
+  background-color: var(--red);
+  transform: translateY(-50%) scale(1.08);
+}
+.lightbox-prev { left: .8rem; }
+.lightbox-next { right: .8rem; }
+
+@media (max-width: 575.98px) {
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  .lightbox-prev { left: .4rem; }
+  .lightbox-next { right: .4rem; }
+}
+
 /* ============================================================
    FOOTER
    ============================================================ */
@@ -643,6 +684,17 @@ h1, h2, h3, .navbar-brand {
   column-gap: .5rem;
   row-gap: .5rem;
 }
+
+/* developer credit in the footer */
+.dev-credit a {
+  color: rgba(255, 255, 255, .5);
+  text-decoration-line: none;
+  margin-left: .35rem;
+  transition-property: color;
+  transition-duration: .2s;
+  transition-timing-function: ease;
+}
+.dev-credit a:hover { color: var(--red-bright); }
 
 /* ============================================================
    SCROLL-REVEAL (elements with .reveal get .visible from js/main.js)
