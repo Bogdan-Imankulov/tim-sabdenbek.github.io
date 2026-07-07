@@ -473,16 +473,31 @@ h1, h2, h3, .navbar-brand {
 
 /* Read more / Show less toggle */
 .btn-toggle {
-  padding-top: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-  padding-left: 0;
+  padding-top: .4rem;
+  padding-right: 1rem;
+  padding-bottom: .4rem;
+  padding-left: 1rem;
   font-weight: 600;
-  color: var(--navy);
-  border-style: none;
-  border-width: 0;
+  font-size: .85rem;
+  color: var(--red);
+  background-color: rgba(191, 10, 48, .07);
+  border-style: solid;
+  border-width: 1.5px;
+  border-color: var(--red);
+  border-top-left-radius: 999px;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+  border-bottom-left-radius: 999px;
+  transition-property: background-color, color, box-shadow, transform;
+  transition-duration: .2s;
+  transition-timing-function: ease;
 }
-.btn-toggle:hover { color: var(--red); }
+.btn-toggle:hover, .btn-toggle:focus {
+  background-color: var(--red);
+  color: var(--white);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(191, 10, 48, .3);
+}
 .btn-toggle .bi {
   transition-property: transform;
   transition-duration: .3s;
